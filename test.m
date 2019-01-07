@@ -31,7 +31,7 @@ varargout{1} = handles.output;
 
 
 %metoda obs³uguj¹ca klawisz "Wczytaj obraz"
-function pushbutton1_Callback(hObject, eventdata, handles)
+function wczytajButton_Callback(hObject, eventdata, handles)
 
 [f,p] = uigetfile({'*.png;*.jpg;*.bmp;*.tif','Supported images';...
                  '*.png','Portable Network Graphics (*.png)';...
@@ -47,15 +47,15 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 %metoda obs³uguj¹ca klawisz "makeLighter"
-function pushbutton2_Callback(hObject, eventdata, handles)
+function makeLighterButton_Callback(hObject, eventdata, handles)
 
 global object;
 object.makeLighter(0);
 imshow(object.currentIm,'Parent',handles.axes1);
 
 
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
+% --- Executes on button press in changeContrastButton.
+function changeContrastButton_Callback(hObject, eventdata, handles)
 %metoda obs³uguj¹ca klawisz "changeContrast"
 global object;
 object.changeContrast(3);
@@ -63,7 +63,7 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 %metoda obs³uguj¹ca klawisz "changeCorelation"
-function pushbutton4_Callback(hObject, eventdata, handles)
+function changeCorelationButton_Callback(hObject, eventdata, handles)
 
 global object;
 object.changeCorelation(2.1);
@@ -71,7 +71,7 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 %metoda obs³uguj¹ca klawisz "binOtsu"
-function pushbutton5_Callback(hObject, eventdata, handles)
+function binOtsuButton_Callback(hObject, eventdata, handles)
  
 global object;
 object.binOtsu();
@@ -79,7 +79,7 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 %metoda obs³uguj¹ca klawisz "gradient"
-function pushbutton6_Callback(hObject, eventdata, handles)
+function gradientButton_Callback(hObject, eventdata, handles)
 
 global object;
 object.gradient(0.1, 1.4,'o');
@@ -87,8 +87,30 @@ imshow(object.currentIm,'Parent',handles.axes1);
 
 
 %metoda obs³uguj¹ca klawisz "changeToBw"
-function pushbutton7_Callback(hObject, eventdata, handles)
+function changeToBwButton_Callback(hObject, eventdata, handles)
  
 global object;
 object.changeToBw();
 imshow(object.currentIm,'Parent',handles.axes1);
+
+
+% --- Executes on slider movement.
+function ChangeContrastSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to ChangeContrastSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function ChangeContrastSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ChangeContrastSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
